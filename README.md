@@ -14,7 +14,8 @@ _**Note**: This largely incomplete project was built for my own consumption.  Wh
 * The front end loads the stored media data as a JSON object, which populates the UI and points to stream sources.
 
 ## Tools used
-* Backbone
+* RequireJS
+* Backbone.js
 * jQuery
 * Bootstrap
 * Google Feeds API
@@ -24,3 +25,4 @@ _**Note**: This largely incomplete project was built for my own consumption.  Wh
 ## Additional notes
 * Config details are read from a file called config.json, not config.example.json as is in this repo.  The example file is included to demonstrate the structure of a working config file, while keeping config data private.
 * An update to the media data is automatically attempted (as a background process, see index.php) on every page load; if more than 1 minute has passed since the last update, the update is allowed to run.
+* All of the included JS files are optimized into one minified file with Require.js: `node libs/require/r.js -o app.build.js`
