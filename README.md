@@ -1,6 +1,6 @@
 # feed-radio
 
-_**Note**: This largely incomplete project was built for my own consumption.  While it strives for best-practices-level code and UI, it remains humbly far from authoritative in those respects._
+_**Note**: This largely incomplete project was built for my own consumption.  While it strives for best-practices-level code and UI, it remains humbly far from authoritative in those respects.  The design has plenty of room for improvement as well._
 
 **feed-radio** is a single-page interface for streaming aggregated audio and video content found in RSS feeds.  See a demo <a href="http://6feetofsnow.com" target="_blank">here</a> that uses RSS feeds from a handful of music blogs.
 
