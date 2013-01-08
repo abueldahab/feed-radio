@@ -1,0 +1,16 @@
+{
+    "database": {
+        "host": "",
+        "username": "",
+        "password": "",
+        "db_name": ""
+    },
+    "feeds": [
+       {
+          "xmlUrl": ""
+       },
+       {
+          "xmlUrl": ""
+       }
+    ]
+}
