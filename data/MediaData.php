@@ -102,7 +102,7 @@ class MediaData {
                 if ( $encl->type == "audio/mpeg" && preg_match_all($soundcloud_regex, $encl->href, $soundcloud_matches) &&
                     count($soundcloud_matches[1]) != 0 )
                 {
-                    $this->handleSoundcloudMatches($soundcloud_matches);
+                    $this->handleSoundcloudMatches($item, $soundcloud_matches);
                 }
             }
         }
@@ -129,18 +129,18 @@ class MediaData {
     }
 
     function handleSoundcloudMatches($item, $matches) {
-        foreach ( $matches[1] as $i => $soundcloudUrl ) {
+        foreach ( $matches[1] as $i => $soundcloud_url ) {
             # don't store if we already have this
-            if ( isset($this->items[$soundcloudUrl]) || !isset($matches[2]) || $matches[2][$i] == "sets" ) break;
+            if ( isset($this->items[$soundcloud_url]) || !isset($matches[2]) || $matches[2][$i] == "sets" ) break;
 
             $track = isset($matches[2][$i]) ? $matches[2][$i] : null;
-            $this->items[$soundcloudUrl] = array(
+            $this->items[$soundcloud_url] = array(
                 "link" => $item->link,
                 "published" => strtotime($item->publishedDate),
                 "track" => $track,
                 "media_src" => "soundcloud"
             );
-            $this->storeSoundcloudAPIData($soundcloudUrl, $track);
+            $this->storeSoundcloudAPIData($soundcloud_url, $track);
         }
     }
 
