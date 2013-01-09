@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="data"></script>
-    <script data-main="js/main" src="js/libs/require/require.js"></script>
+    <script data-main="js/main<?php echo !isset($_GET["js_debug"]) ? "-built" : "" ?>" src="js/libs/require/require.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
