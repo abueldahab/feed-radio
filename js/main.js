@@ -34,18 +34,24 @@ require([
     "collections/items"
 ], function($, _, Backbone, Soundcloud, Youtube, Lazyload, PlayerModel, ItemModel, PlayerView, BrowseView, TrackBrowseView, ItemsBrowseView, ItemView, SoundcloudView, YoutubeView, ItemsCollection) {
 
+    // player model, view
     var player = new PlayerModel();
-
     var playerView = new PlayerView({ 
         model: player, 
         el: $("#player") 
     });
 
-    var allItems = [];
+    // item models, views from JSON object
+    var allItems = [],
+        itemCt = 0;
     _.each(itemsJson, function(item, id, list) {
+        // skip if title or thumbnail missing -- this should be moved to data collection
         if ( !item.title || !item.thumbnail ) return;
 
         item.id = id;
+        // init player with first item as soon as possible
+        if ( itemCt == 0 ) player.setNowPlaying(id);
+        
         var itemModel = new ItemModel(item),
             attrs = { 
                 model: itemModel,
@@ -57,6 +63,7 @@ require([
             },
             itemView;
 
+        // use appropriate view based on media_src
         switch ( item.media_src ) {
             case "youtube":
                 itemView = new YoutubeView(attrs);
@@ -69,13 +76,13 @@ require([
 
         itemModel.set({ view: itemView });
         allItems.push(itemModel);
+        itemCt++;
     });
 
+    // item collection, browse button views
     var itemsCollection = new ItemsCollection(allItems, { player: player }),
         trackPrev = new TrackBrowseView({ el: $(".track-prev"), prev: true, items: itemsCollection }),
         trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection }),
         itemsPrev = new ItemsBrowseView({ el: $(".items-prev"), prev: true, items: itemsCollection }),
         itemsNext = new ItemsBrowseView({ el: $(".items-next"), prev: false, items: itemsCollection });
-
-    player.setNowPlaying(itemsCollection.at(0).get("id"));
 });
