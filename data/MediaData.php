@@ -192,7 +192,7 @@ class MediaData {
     function storeSoundcloudAPIData($id, $track) {
         # query by track url to get fields
         $soundcloud_query = array(
-            "url" => "http://soundcloud.com/" . urlencode($id) . "/" . urlencode($track["track"]),
+            "url" => "http://soundcloud.com/" . urlencode($id) . "/" . urlencode($track),
             "client_id" => "pmMtnx3RtGTjpsLJQDptsQ"
         );
         foreach ( $soundcloud_query as $key => $val ) $soundcloud_query_string .= "$key=$val&";
