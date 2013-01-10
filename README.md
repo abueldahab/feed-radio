@@ -14,13 +14,14 @@ _**Note**: This largely incomplete project was built for my own consumption.  Wh
 * The front end loads the stored media data as a JSON object, which populates the UI and points to stream sources.
 
 ## Tools used
-* RequireJS
-* Backbone.js
-* jQuery
-* Bootstrap
-* Google Feeds API
-* YouTube API
-* SoundCloud API
+* <a href="http://requirejs.org/" target="_blank">RequireJS</a>
+* <a href="http://documentcloud.github.com/backbone/" target="_blank">Backbone.js</a>
+* <a href="http://jquery.com/" target="_blank">jQuery</a>
+* <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>
+* <a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a>
+* <a href="https://developers.google.com/feed/" target="_blank">Google Feeds API</a>
+* <a href="https://developers.google.com/youtube/" target="_blank">YouTube API</a>
+* <a href="http://developers.soundcloud.com/" target="_blank">SoundCloud API</a>
 
 ## Additional notes
 * Config details are read from a file called config.json, not config.example.json as is in this repo.  The example file is included to demonstrate the structure of a working config file, while keeping config data private.
