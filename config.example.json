@@ -1,16 +1,22 @@
 {
+    "site_url": "http://my-domain.com",
     "database": {
-        "host": "",
-        "username": "",
-        "password": "",
-        "db_name": ""
+        "host": "my_host",
+        "username": "my_username",
+        "password": "my_password",
+        "db_name": "my_db_name"
+    },
+    "account_keys": {
+        "youtube_api": "XXXXXX",
+        "soundcloud_api": "XXXXXX",
+        "google_analytics": "UA-XXXXX-Y"
     },
     "feeds": [
        {
-          "xmlUrl": ""
+          "xmlUrl": "http://some-content.com/rss"
        },
        {
-          "xmlUrl": ""
+          "xmlUrl": "http://more-content.com/feed"
        }
     ]
 }
