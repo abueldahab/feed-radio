@@ -1,7 +1,7 @@
 <?php 
-include "data/MediaData.php";
-$media_data = new MediaData();
-$google_analytics_account_key = $mediaData->config->account_keys->google_analytics;
+include "php/ConfigData.php";
+$config_data = new ConfigData();
+$google_analytics_account_key = $config_data->account_keys->google_analytics;
 ?>
 
 <!doctype html>

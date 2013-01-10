@@ -2,20 +2,15 @@
 
 class MediaData {
     
-    public $config;
+    public $config_data;
 
-    function __construct($action) {
-        $this->loadConfig();
+    function __construct($config_data, $action) {
+        $this->config_data = $config_data;
         if ( $action ) $this->$action();
     }
 
-    function loadConfig() {
-        $config_json = file_get_contents("../config.json");
-        $this->config = json_decode($config_json);
-    }
-
     function connectToDB() {
-        $db = $this->config->database;
+        $db = $this->config_data->database;
         $this->mysqli = new mysqli($db->host, $db->username, $db->password, $db->db_name);
         if ( $this->mysqli->connect_error ) die("Connect error " . $this->db->connect_error);
     }
@@ -41,13 +36,13 @@ class MediaData {
         # if update has happened recently, don't update again
         if ( !$this->updateNecessary() ) return;
 
-        foreach ( $this->config->feeds as $feed ) {
+        foreach ( $this->config_data->feeds as $feed ) {
             $feedURL = $feed->xmlUrl;
 
             # google feed API
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&q=" . $feedURL);
-            curl_setopt($ch, CURLOPT_REFERER, $this->config->site_url);
+            curl_setopt($ch, CURLOPT_REFERER, $this->config_data->site_url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($ch);
             curl_close($ch);
@@ -154,7 +149,7 @@ class MediaData {
             $youtube_curl_options = array(
                 CURLOPT_URL => "http://gdata.youtube.com/feeds/api/videos/batch",
                 CURLOPT_HTTPHEADER => array(
-                    "X-GData-Key: key=" . $this->config->account_keys->youtube_api,
+                    "X-GData-Key: key=" . $this->config_data->account_keys->youtube_api,
                     "Content-Type: text/xml"
                 ),
                 CURLOPT_HEADER => 0,
@@ -195,7 +190,7 @@ class MediaData {
         # query by track url to get fields
         $soundcloud_query = array(
             "url" => "http://soundcloud.com/" . urlencode($id) . "/" . urlencode($track),
-            "client_id" => $this->config->account_keys->soundcloud_api
+            "client_id" => $this->config_data->account_keys->soundcloud_api
         );
         foreach ( $soundcloud_query as $key => $val ) $soundcloud_query_string .= "$key=$val&";
         $soundcloud_curl_options = array(
