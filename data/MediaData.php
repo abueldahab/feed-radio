@@ -2,7 +2,7 @@
 
 class MediaData {
     
-    public var $config;
+    public $config;
 
     function __construct($action) {
         $this->loadConfig();
