@@ -1,10 +1,12 @@
 <?php
 
 class MediaData {
+    
+    public var $config;
 
     function __construct($action) {
         $this->loadConfig();
-        $this->$action();
+        if ( $action ) $this->$action();
     }
 
     function loadConfig() {
@@ -45,7 +47,7 @@ class MediaData {
             # google feed API
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&q=" . $feedURL);
-            curl_setopt($ch, CURLOPT_REFERER, "http://6feetofsnow.com");
+            curl_setopt($ch, CURLOPT_REFERER, $this->config->site_url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($ch);
             curl_close($ch);
@@ -152,7 +154,7 @@ class MediaData {
             $youtube_curl_options = array(
                 CURLOPT_URL => "http://gdata.youtube.com/feeds/api/videos/batch",
                 CURLOPT_HTTPHEADER => array(
-                    "X-GData-Key: key=AI39si45dzbBMygRDlxvQiGfxJeqs8tI0qiOs3P_E8eqdMoPRig0jwtKcuj2e3eB3EoDo3CoDBTfNJsMOHkZMp3o3aeyR10dIw",
+                    "X-GData-Key: key=" . $this->config->account_keys->youtube_api,
                     "Content-Type: text/xml"
                 ),
                 CURLOPT_HEADER => 0,
@@ -193,7 +195,7 @@ class MediaData {
         # query by track url to get fields
         $soundcloud_query = array(
             "url" => "http://soundcloud.com/" . urlencode($id) . "/" . urlencode($track),
-            "client_id" => "pmMtnx3RtGTjpsLJQDptsQ"
+            "client_id" => $this->config->account_keys->soundcloud_api
         );
         foreach ( $soundcloud_query as $key => $val ) $soundcloud_query_string .= "$key=$val&";
         $soundcloud_curl_options = array(
