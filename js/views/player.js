@@ -33,7 +33,7 @@ define([
 
         replaceItemHtml: function() {
             var nowPlayingIndex = this.model.get("nowPlaying"),
-                nowPlayingModel = this.model.get("items").get(nowPlayingIndex), 
+                nowPlayingModel = nowPlayingIndex ? this.model.get("items").get(nowPlayingIndex) : this.model.get("items").at(0),
                 template = _.template($("#player_" + nowPlayingModel.attributes.media_src + "_template").html(), 
                     nowPlayingModel.attributes);
 

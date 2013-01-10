@@ -31,17 +31,10 @@ define([
         },  
 
         setNowPlaying: function(itemId) {
-            if ( !this.get("nowPlaying") ) { 
-                this.set({
-                    nowPlaying: itemId,
-                    autoplay: false
-                });  
-            } else {
-                this.set({
-                    nowPlaying: itemId,
-                    autoplay: true
-                }); 
-            }   
+            this.set({
+                nowPlaying: itemId,
+                autoplay: true
+            }); 
         }   
     });
 

@@ -42,16 +42,12 @@ require([
     });
 
     // item models, views from JSON object
-    var allItems = [],
-        itemCt = 0;
+    var allItems = [];
     _.each(itemsJson, function(item, id, list) {
         // skip if title or thumbnail missing -- this should be moved to data collection
         if ( !item.title || !item.thumbnail ) return;
 
         item.id = id;
-        // init player with first item as soon as possible
-        if ( itemCt == 0 ) player.setNowPlaying(id);
-        
         var itemModel = new ItemModel(item),
             attrs = { 
                 model: itemModel,
@@ -76,7 +72,6 @@ require([
 
         itemModel.set({ view: itemView });
         allItems.push(itemModel);
-        itemCt++;
     });
 
     // item collection, browse button views
@@ -85,4 +80,6 @@ require([
         trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection }),
         itemsPrev = new ItemsBrowseView({ el: $(".items-prev"), prev: true, items: itemsCollection }),
         itemsNext = new ItemsBrowseView({ el: $(".items-next"), prev: false, items: itemsCollection });
+
+    playerView.render();
 });
