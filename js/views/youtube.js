@@ -5,12 +5,16 @@ define([
     "youtube"
 ], function(_, Backbone, ItemView) {
     var YoutubeView = ItemView.extend({
+        play: function() {
+            window.ytPlayer.playVideo();
+        },
+
         pause: function() {
             var isPlaying = window.ytPlayer.getPlayerState() == 1;
             if ( isPlaying ) { 
-                ytPlayer.pauseVideo();
+                window.ytPlayer.pauseVideo();
             } else {
-                ytPlayer.playVideo();
+                window.ytPlayer.playVideo();
             }   
             this.togglePlayClass(isPlaying);
         },  

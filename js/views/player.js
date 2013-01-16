@@ -16,9 +16,9 @@ define([
         },  
 
         render: function() {
-            var self = this;
+            var _this = this;
             this.setInactive(function() { 
-                self.replaceItemHtml();
+                _this.replaceItemHtml();
             });
             return this;
         },  
@@ -32,9 +32,11 @@ define([
         },  
 
         replaceItemHtml: function() {
+            if ( !this.model.get("nowPlaying") ) this.model.setNowPlaying(this.model.get("items").at(0).id, false);
+
             var nowPlayingIndex = this.model.get("nowPlaying"),
-                nowPlayingModel = nowPlayingIndex ? this.model.get("items").get(nowPlayingIndex) : this.model.get("items").at(0),
-                template = _.template($("#player_" + nowPlayingModel.attributes.media_src + "_template").html(), 
+                nowPlayingModel = this.model.get("items").get(nowPlayingIndex),
+                template = _.template($("#player_" + nowPlayingModel.attributes.mediaSrc + "_template").html(), 
                     nowPlayingModel.attributes);
 
             this.$el.html(template);
@@ -57,6 +59,7 @@ define([
 
         animateItems: function() {
             if ( !this.model.get("items") ) return;
+
             var itemModel = this.model.get("items").getNowPlayingModel(),
                 itemView = itemModel.get("view"),
                 $item = itemView.$el,

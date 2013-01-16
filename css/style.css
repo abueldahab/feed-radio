@@ -33,7 +33,7 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 
 .items, .items-view { height: 16em }
 
-.items-view { overflow: hidden; position: relative }
+.items-view { overflow: hidden; position: relative; margin-bottom: 4em }
 .items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7% }
 
 .item { height: 15em; margin: 10px 25px 10px 0 !important; position: relative; z-index: 1; overflow: hidden; float: left ; box-shadow: 0 0 15px rgba(255, 255, 255, 0.25); border: 5px solid rgba(255, 255, 255, 0.15); cursor: pointer; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s;  }

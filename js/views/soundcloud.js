@@ -4,6 +4,10 @@ define([
     "views/item"
 ], function(_, Backbone, ItemView) {
     var SoundcloudView = ItemView.extend({
+        play: function() {
+            window.SM.togglePause();
+        },
+
         pause: function() {
             var isPlaying = !window.SM.paused;
             window.SM.togglePause();

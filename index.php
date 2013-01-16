@@ -2,26 +2,40 @@
 include "php/ConfigData.php";
 $config_data = new ConfigData();
 $google_analytics_account_key = $config_data->account_keys->google_analytics;
+
+include "php/MediaData.php";
+$media_data = new MediaData($config_data);
+$items = $media_data->get();
+$first_id = array_shift(array_keys($items));
+$first_item = (object) array_shift(array_values($items));
+
 ?>
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="data"></script>
-    <script data-main="js/main<?php echo !isset($_GET["js_debug"]) ? "-built" : "" ?>" src="js/libs/require/require.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
+    <script data-main="js/main<?php echo !isset($_GET["js_debug"]) ? "-built" : "" ?>" src="js/libs/require/require.js"></script>
 </head>
+
 <body> 
     <div id="container" class="container-fluid clearfix">
+
+        <!-- FEATURED MEDIA -->
         <div class="hero-unit clearfix">
+            <!-- PREV TRACK -->
             <div class="browse track-browse track-prev">&laquo;</div>
-            
-            <!-- media player templates by type -->
+
+            <!-- MEDIA -->
+            <div id="player"></div>
+
+            <!-- MEDIA PLAYER TEMPLATES BY MEDIA SOURCE -->
             <script type="text/template" id="player_youtube_template">
                 <p>
                     <a href="<%= link %>" target="_blank">#</a>
@@ -38,26 +52,34 @@ $google_analytics_account_key = $config_data->account_keys->google_analytics;
                 </p>
                 <img src="<%= thumbnail %>" />
             </script>
-            <div id="player"></div>
             
+            <!-- NEXT TRACK -->
             <div class="browse track-browse track-next">&raquo;</div>
         </div>
-        <div class="items-view">
 
-            <!-- item template -->
-            <script type="text/template" id="item_template">
-                <p>
-                    <a href="<%= link %>" target="_blank">#</a>
-                    <%- title %>    
-                </p>
-                <img src="img/twinkle_twinkle.png" data-original="<%= thumbnail %>" />
-            </script>
-            <ul class="items row"></ul>
+        <!-- ITEMS ROW -->
+        <div class="items-view">
+            <ul class="items row">
+
+            <?php foreach ( $items as $id => $item ): ?>
+                <?php $item = (object) $item; ?>
+                <li class="item span3" data-media-id="<?php echo $id ?>" data-link="<?php echo $item->link ?>" data-title="<?php echo $item->title ?>" data-thumbnail="<?php echo $item->thumbnail ?>" data-media-src="<?php echo $item->media_src ?>" <?php echo $item->soundcloud_stream ? 'data-soundcloud-stream="' . $item->soundcloud_stream . '"' : '' ?>>
+                    <p>
+                        <a href="<?php echo $item->link ?>" target="_blank">#</a>
+                        <?php echo $item->title ?>
+                    </p>
+                    <img src="img/twinkle_twinkle.png" data-original="<?php echo $item->thumbnail ?>" />
+                </li>
+
+            <?php endforeach ?>
+
+            </ul>
 
             <div class="browse items-browse items-prev">&lsaquo;</div>
             <div class="browse items-browse items-next">&rsaquo;</div>
         </div>
     </div>
+
 <?php if ( $google_analytics_account_key ): ?>
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -71,6 +93,8 @@ $google_analytics_account_key = $config_data->account_keys->google_analytics;
         })();
     </script>
 <?php endif ?>
+
 </body>
 </html>
-<?php exec("php data/index.php action=update &> /dev/null &") ?>
+<?php # attempt to update data ?>
+<?php exec("php php/MediaDataUpdater.php > /dev/null &"); ?>

@@ -30,10 +30,10 @@ define([
             });
         },  
 
-        setNowPlaying: function(itemId) {
+        setNowPlaying: function(itemId, autoplay) {
             this.set({
                 nowPlaying: itemId,
-                autoplay: true
+                autoplay: autoplay === false ? false : true
             }); 
         }   
     });

@@ -9,12 +9,11 @@ require.config({
     },  
     shim: {
         underscore: { exports: "_" },  
-
         backbone: { deps: ["jquery", "underscore"], exports: "Backbone" },  
-
         lazyload: { deps: ["jquery"], exports: "Lazyload" }   
     }
 });
+
 require([
     "jquery", 
     "underscore", 
@@ -43,29 +42,29 @@ require([
 
     // item models, views from JSON object
     var allItems = [];
-    _.each(itemsJson, function(item, id, list) {
-        // skip if title or thumbnail missing -- this should be moved to data collection
-        if ( !item.title || !item.thumbnail ) return;
-
-        item.id = id;
-        var itemModel = new ItemModel(item),
+    _.each($(".item"), function(itemEl, id, list) {
+        var itemData = $(itemEl).data(),
             attrs = { 
-                model: itemModel,
-                id: id, 
-                title: item.title,
-                link: item.link,
-                thumbnail: item.thumbnail,
+                el: itemEl,
+                id: itemData.mediaId, 
+                title: itemData.title,
+                link: itemData.link,
+                thumbnail: itemData.thumbnail,
+                mediaSrc: itemData.mediaSrc,
                 player: player
-            },
+            };
+        if ( itemData.soundcloudStream ) attrs.soundcloud_stream = itemData.soundcloudStream;
+        var itemModel = new ItemModel(attrs),
             itemView;
 
+        attrs.model = itemModel;
+
         // use appropriate view based on media_src
-        switch ( item.media_src ) {
+        switch ( itemData.mediaSrc ) {
             case "youtube":
                 itemView = new YoutubeView(attrs);
                 break;
             case "soundcloud":
-                attrs.soundcloud_stream = item.soundcloud_stream;
                 itemView = new SoundcloudView(attrs);
                 break;
         }
@@ -80,6 +79,4 @@ require([
         trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection }),
         itemsPrev = new ItemsBrowseView({ el: $(".items-prev"), prev: true, items: itemsCollection }),
         itemsNext = new ItemsBrowseView({ el: $(".items-next"), prev: false, items: itemsCollection });
-
-    playerView.render();
 });

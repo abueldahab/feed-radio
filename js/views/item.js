@@ -4,18 +4,12 @@ define([
     "backbone"
 ], function($, _, Backbone) {
     var ItemView = Backbone.View.extend({
-        tagName: "li",
-        className: "item span3",
-
         events: {
             click: "toggle"
         },  
 
         initialize: function(attrs) {
             this.player = attrs.player;
-
-            this.render(attrs);
-            $(".items").append(this.$el);
 
             this.$el.find("img").lazyload({
                 container: $(".items-view"),
@@ -25,26 +19,27 @@ define([
             });
         },  
 
-        render: function(attrs) {
-            var template = _.template($("#item_template").html(), attrs);
-            this.$el.html(template);
-            return this;                                                                                            
-        },
-
         toggle: function() {
             if ( this.player.get("nowPlaying") == this.id ) {
-                this.pause();                                                                                                    
-            } else {                                                                                                            
-                this.activate();                                                                                                 
-            }                                                                                                                   
-        },                                                                                                                      
-                                                                                                                                
-        togglePlayClass: function(isPlaying) {                                                                                  
-            if ( isPlaying ) {                                                                                                  
+                if ( $(".playing").length ) {
+                    this.pause();
+                } else {
+                    this.activate();
+                    this.player.set({ autoplay: true });
+                    this.player.view.animateItems();
+                    this.play();
+                }
+            } else {
+                this.activate();
+            }
+        },
+
+        togglePlayClass: function(isPlaying) {
+            if ( isPlaying ) {
                 $(".playing").removeClass("playing");
-            } else {                                                                                                            
-                this.$el.addClass("playing");                                                                           
-            }                                                                                                                   
+            } else {
+                this.$el.addClass("playing");
+            }
         },
 
         activate: function() {
