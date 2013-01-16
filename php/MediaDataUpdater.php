@@ -66,7 +66,7 @@ class MediaDataUpdater {
     }
 
     function getMediaMatches($item) {
-        $youtube_regex = "/youtube\.com\/[^user][embed\/]*[v\/]*[watch\?v=]*([^\"\?\&]+)/";
+        $youtube_regex = "/youtube\.com\/(embed\/|v\/|watch\?v=)([^\"\?\&]+)/";
         $soundcloud_regex = "/soundcloud\.com\/([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+[\/^download[a-zA-Z0-9\-]]*)/";
         #$vimeo_regex = "/player\.vimeo\.com\/video\/([0-9]+)/";
 
@@ -91,7 +91,8 @@ class MediaDataUpdater {
     }
 
     function handleYoutubeMatches($item, $matches) {
-        foreach ( $matches[1] as $youtube_url ) {
+        foreach ( $matches[2] as $youtube_url ) {
+
             # don't store if we already have this
             if ( isset($this->items[$youtube_url]) ) break;
             
