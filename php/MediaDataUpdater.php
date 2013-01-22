@@ -15,11 +15,16 @@ class MediaDataUpdater {
     }  
 
     function update() {
+        global $argv;
+
         # get latest items from feeds, update db
         $this->connectToDB();
 
+        # debug flag
+        $this->debug = isset($argv) && $argv[1] == "debug";
+
         # if update has happened recently, don't update again
-        if ( !$this->updateNecessary() ) return;
+        if ( !$this->debug && !$this->updateNecessary() ) return;
 
         foreach ( $this->config_data->feeds as $feed ) {
             $feedURL = $feed->xmlUrl;
@@ -155,7 +160,7 @@ class MediaDataUpdater {
                 $id_node = $entry->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "id");
                 $id = array_pop(explode("/", $id_node->item(0)->nodeValue));
                 $title_node = $entry->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "title");
-                $title = htmlentities($title_node->item(0)->nodeValue);
+                $title = htmlspecialchars($title_node->item(0)->nodeValue);
                 
                 # attempt to filter out errors and talky/promo things
                 if ( !$title || $title == "" || $title == "Error" || preg_match('/interview|episode|nardwuar|vlog|talks/i', $title) ) {
@@ -170,7 +175,7 @@ class MediaDataUpdater {
                     if ( $thumbnail ) {
                         $this->items[$id]["thumbnail"] = $thumbnail;
                         $this->items[$id]["title"] = $title;
-                        print_r($this->items[$id]);
+                        if ( $this->debug ) print_r($this->items[$id]);
                     } else {
                         unset($this->items[$id]);
                     }
@@ -214,7 +219,6 @@ class MediaDataUpdater {
         $response = json_decode($response_json);
     
         if ( count($response) > 1 ) $response = $response[0];
-        #echo json_encode($response);
 
         if ( !isset($response->stream_url) || !isset($response->artwork_url) || !isset($response->user->username) || !isset($response->title) ) {
             unset($this->items[$id]);
@@ -222,9 +226,11 @@ class MediaDataUpdater {
         }
 
         # store fields
-        $this->items[$id]["title"] = $response->user->username . ": " . $response->title;
+        $this->items[$id]["title"] = htmlspecialchars($response->user->username) . ": " . htmlspecialchars($response->title);
         $this->items[$id]["thumbnail"] = str_replace("large", "crop", $response->artwork_url);
         $this->items[$id]["soundcloud_stream"] = $response->stream_url;
+
+        if ( $this->debug ) print_r($this->items[$id]);
     }
 }
 
