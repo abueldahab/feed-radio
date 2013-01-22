@@ -39,7 +39,7 @@ $first_item = (object) array_shift(array_values($items));
             <script type="text/template" id="player_youtube_template">
                 <p>
                     <a href="<%= link %>" target="_blank">#</a>
-                    <%-title %>
+                    <%- title %>
                 </p>
                 <div class="youtube-wrap">
                     <div id="<%= id %>-player" />
@@ -48,7 +48,7 @@ $first_item = (object) array_shift(array_values($items));
             <script type="text/template" id="player_soundcloud_template">
                 <p>
                     <a href="<%= link %>" target="_blank">#</a>
-                    <%-title %>
+                    <%- title %>
                 </p>
                 <img src="<%= thumbnail %>" />
             </script>
@@ -66,7 +66,7 @@ $first_item = (object) array_shift(array_values($items));
                 <li class="item span3" data-media-id="<?php echo $id ?>" data-link="<?php echo $item->link ?>" data-title="<?php echo $item->title ?>" data-thumbnail="<?php echo $item->thumbnail ?>" data-media-src="<?php echo $item->media_src ?>" <?php echo $item->soundcloud_stream ? 'data-soundcloud-stream="' . $item->soundcloud_stream . '"' : '' ?>>
                     <p>
                         <a href="<?php echo $item->link ?>" target="_blank">#</a>
-                        <?php echo $item->title ?>
+                        <?php echo html_entity_decode($item->title) ?>
                     </p>
                     <img src="img/twinkle_twinkle.png" data-original="<?php echo $item->thumbnail ?>" />
                 </li>

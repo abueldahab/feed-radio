@@ -155,7 +155,7 @@ class MediaDataUpdater {
                 $id_node = $entry->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "id");
                 $id = array_pop(explode("/", $id_node->item(0)->nodeValue));
                 $title_node = $entry->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "title");
-                $title = $title_node->item(0)->nodeValue;
+                $title = htmlentities($title_node->item(0)->nodeValue);
                 
                 # attempt to filter out errors and talky/promo things
                 if ( !$title || $title == "" || $title == "Error" || preg_match('/interview|episode|nardwuar|vlog|talks/i', $title) ) {
@@ -170,6 +170,7 @@ class MediaDataUpdater {
                     if ( $thumbnail ) {
                         $this->items[$id]["thumbnail"] = $thumbnail;
                         $this->items[$id]["title"] = $title;
+                        print_r($this->items[$id]);
                     } else {
                         unset($this->items[$id]);
                     }
