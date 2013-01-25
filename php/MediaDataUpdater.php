@@ -71,7 +71,7 @@ class MediaDataUpdater {
     }
 
     function getMediaMatches($item) {
-        $youtube_regex = "/youtube\.com\/(embed\/|v\/|watch\?v=)([^\"\?\&]+)/";
+        $youtube_regex = "/youtube\.com\/(embed\/|v\/|watch\?v=)([^\"\?\&\#]+)/";
         $soundcloud_regex = "/soundcloud\.com\/([a-zA-Z0-9\-]+)\/([a-zA-Z0-9\-]+[\/^download[a-zA-Z0-9\-]]*)/";
         #$vimeo_regex = "/player\.vimeo\.com\/video\/([0-9]+)/";
 
@@ -106,7 +106,7 @@ class MediaDataUpdater {
                 "published" => strtotime($item->publishedDate),
                 "media_src" => "youtube"
             );
-            
+
             # prepare batch query for YT API
             $youtube_batch_index = floor(count($this->items) % 50);
             $this->youtube_entries[$youtube_batch_index] .= "<entry><id>http://gdata.youtube.com/feeds/api/videos/$youtube_url</id></entry>";
@@ -161,7 +161,7 @@ class MediaDataUpdater {
                 $id = array_pop(explode("/", $id_node->item(0)->nodeValue));
                 $title_node = $entry->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "title");
                 $title = htmlspecialchars($title_node->item(0)->nodeValue);
-                
+
                 # attempt to filter out errors and talky/promo things
                 if ( !$title || $title == "" || $title == "Error" || preg_match('/interview|episode|nardwuar|vlog|talks/i', $title) ) {
                     unset($this->items[$id]);
