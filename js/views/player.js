@@ -10,8 +10,7 @@ define([
 
         initialize: function() {
             this.model.set({ 
-                view: this,
-                nowPlaying: null
+                view: this
             });  
         },  
 
@@ -58,8 +57,6 @@ define([
         },
 
         animateItems: function() {
-            if ( !this.model.get("items") ) return;
-
             var itemModel = this.model.get("items").getNowPlayingModel(),
                 itemView = itemModel.get("view"),
                 $item = itemView.$el,

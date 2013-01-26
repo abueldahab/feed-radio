@@ -79,4 +79,7 @@ require([
         trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection }),
         itemsPrev = new ItemsBrowseView({ el: $(".items-prev"), prev: true, items: itemsCollection }),
         itemsNext = new ItemsBrowseView({ el: $(".items-next"), prev: false, items: itemsCollection });
+
+    // queue first item
+    player.set({ nowPlaying: allItems[0] });
 });

@@ -20,7 +20,7 @@ define([
             });
 
             window.SC.initialize({ client_id: this.get("soundcloudID") });
-                
+            
             $(document).on("keyup", function(event) {
                 if ( event.which == 39 ) { 
                     $(".track-next").trigger("click");

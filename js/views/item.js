@@ -21,14 +21,7 @@ define([
 
         toggle: function() {
             if ( this.player.get("nowPlaying") == this.id ) {
-                if ( $(".playing").length ) {
-                    this.pause();
-                } else {
-                    this.activate();
-                    this.player.set({ autoplay: true });
-                    this.player.view.animateItems();
-                    this.play();
-                }
+                this.pause();
             } else {
                 this.activate();
             }
