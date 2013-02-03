@@ -50,7 +50,11 @@ $first_item = (object) array_shift(array_values($items));
                     <a href="<%= link %>" target="_blank">#</a>
                     <%- title %>
                 </p>
-                <img src="<%= thumbnail %>" />
+                <div class="soundcloud-wrap">
+                    <div class="soundcloud-center">
+                        <img src="<%= thumbnail %>" />
+                    </div>
+                </div>
             </script>
             
             <!-- NEXT TRACK -->
@@ -83,6 +87,8 @@ $first_item = (object) array_shift(array_values($items));
 <?php if ( $google_analytics_account_key ): ?>
     <script type="text/javascript">
         var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
         _gaq.push(['_setAccount', '<?php echo $google_analytics_account_key ?>']);
         _gaq.push(['_trackPageview']);
 
