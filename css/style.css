@@ -9,7 +9,7 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .browse { cursor: pointer; color: white; width: 7.5%; text-align: center; text-shadow: 0 1px black }
 .browse:hover { color: #06a }
 
-.track-browse { line-height: .65em; font-size: 7em; position: absolute; top: 0px; height: .9em }
+.track-browse { line-height: .65em; font-size: 7em; position: absolute; top: 0px; height: .9em; border-bottom: 1px solid #666 }
 .items-browse { position: absolute; top: 0; z-index: 5; height: 100%; line-height: 2em; font-size: 7em }
 .items-prev, .track-prev { left: 0px; border-right: 1px solid #666 }
 .items-prev:hover, .items-prev:hover { border-color: #999 }
@@ -22,7 +22,8 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 @media all and (max-width: 800px) { #player { height: 537px } }
 @media all and (max-width: 600px) { #player { height: 427px } }
 @media all and (max-width: 400px) { #player { height: 312px } }
-#player p { font-size: 2.5em; padding: .5em 9%; margin: 0; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; text-shadow: 0 2px black; color: white; border-bottom: 1px solid #666 }
+
+#player p { font-size: 2.5em; padding: .5em; margin: 0 7.5%; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; text-shadow: 0 2px black; color: white; border-bottom: 1px solid #666; width: 85% }
 #player p a:hover { color: white }
 #player p a:hover, .browse:hover { -webkit-transition-property: color; -webkit-transition-duration: .1s; -moz-transition-property: color; -moz-transition-duration: .1s; transition-property: color; transition-duration: .1s }
 #player img { cursor: pointer; display: inline }
