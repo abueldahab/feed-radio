@@ -10,7 +10,7 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .browse:hover { color: #06a; border-color: #999 }
 
 .track-browse { line-height: .65em; font-size: 7em; position: absolute; top: 0px; height: .9em; border-width: 0 0 1px }
-.items-browse { position: absolute; top: 0; z-index: 5; height: 100%; line-height: 2em; font-size: 7em; border-width: 1px 0 }
+.items-browse { position: absolute; top: 0; bottom: 0; z-index: 5; line-height: 2em; font-size: 7em; border-width: 1px 0 }
 .items-prev, .track-prev { left: 0px; border-right-width: 1px }
 .items-next, .track-next { right: 0px; border-left-width: 1px }
 
@@ -46,7 +46,7 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .items-view { overflow: hidden; position: relative; margin-bottom: 4em }
 .items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7%; border-bottom: 1px solid #666; border-top: 1px solid #666 }
 
-.item { height: 15em; margin: 0 !important; position: relative; z-index: 1; overflow: hidden; float: left ; border-left: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s;  }
+.item { height: 15em; margin: 0; position: relative; z-index: 1; overflow: hidden; float: left ; border-left: 1px solid #666; cursor: pointer; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s;  }
 .item:hover { border-color: transparent; background: transparent; color: white; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s; }
 .item img { position: absolute; top: -30%; left: -30%; max-width: none; height: auto !important; cursor: pointer; display: inline }
 .item p { position: relative; z-index: 1; background: rgba(33, 33, 33, 0.75); font-size: 1.5em; line-height: 1.1em; padding: 10px; cursor: pointer; text-shadow: 0 1px black; color: white; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); font-weight: bold; border-bottom: 1px solid rgba(33, 33, 33, 0.5) }
