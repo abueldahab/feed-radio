@@ -22,13 +22,15 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 @media all and (max-width: 800px) { #player { height: 537px } }
 @media all and (max-width: 600px) { #player { height: 427px } }
 @media all and (max-width: 400px) { #player { height: 312px } }
-#player p { font-size: 2.5em; margin: .5em 9% !important; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; text-shadow: 0 2px black; color: white }
+#player p { font-size: 2.5em; padding: .5em 9%; margin: 0; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; text-shadow: 0 2px black; color: white; border-bottom: 1px solid #666 }
 #player p a:hover { color: white }
 #player p a:hover, .browse:hover { -webkit-transition-property: color; -webkit-transition-duration: .1s; -moz-transition-property: color; -moz-transition-duration: .1s; transition-property: color; transition-duration: .1s }
 #player img { cursor: pointer; display: inline }
 #player img:before, #player iframe:before { content: " "; position: absolute; z-index: -1; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 5px solid #ffea00 }
 
-.youtube-wrap { position: relative; width: 100% }
+
+.youtube-wrap, .soundcloud-wrap { position: relative; width: 100% }
+
 @media all and (min-width: 1000px) { .youtube-wrap, .soundcloud-wrap { height: 550px } }
 @media all and (max-width: 1000px) { .youtube-wrap, .soundcloud-wrap { height: 550px } }
 @media all and (max-width: 800px) { .youtube-wrap, .soundcloud-wrap { height: 450px } }
@@ -36,12 +38,13 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 @media all and (max-width: 400px) { .youtube-wrap, .soundcloud-wrap { height: 225px } }
 .youtube-wrap iframe { width: 100%; height: 100% }
 
-.soundcloud-wrap { position: relative; width: 100%; text-align: center; display: table }
+.soundcloud-wrap { text-align: center; display: table }
 .soundcloud-center { display: table-cell; vertical-align: middle }
+
 
 .items, .items-view, .item { height: 15em }
 
-.items-view { overflow: hidden; position: relative; margin-bottom: 4em }
+.items-view { overflow: hidden; position: relative; margin-bottom: 4em; border-bottom: 1px solid #666; border-top: 1px solid #666 }
 .items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7% }
 
 .item { height: 15em; margin: 0 !important; position: relative; z-index: 1; overflow: hidden; float: left ; border-left: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s;  }
