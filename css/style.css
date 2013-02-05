@@ -6,15 +6,13 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .container-fluid { overflow: visible; padding: 0 }
 .hero-unit { padding: 0; margin: 0; border-radius: 0; position: relative }
 
-.browse { cursor: pointer; color: white; width: 7.5%; text-align: center; text-shadow: 0 1px black }
-.browse:hover { color: #06a }
+.browse { cursor: pointer; color: white; width: 7.5%; text-align: center; text-shadow: 0 1px black; border-color: #666; border-style: solid }
+.browse:hover { color: #06a; border-color: #999 }
 
-.track-browse { line-height: .65em; font-size: 7em; position: absolute; top: 0px; height: .9em; border-bottom: 1px solid #666 }
-.items-browse { position: absolute; top: 0; z-index: 5; height: 100%; line-height: 2em; font-size: 7em }
-.items-prev, .track-prev { left: 0px; border-right: 1px solid #666 }
-.items-prev:hover, .items-prev:hover { border-color: #999 }
-.items-next, .track-next { right: 0px; border-left: 1px solid #666 }
-.items-next:hover, .track-next:hover { border-color: #999 }
+.track-browse { line-height: .65em; font-size: 7em; position: absolute; top: 0px; height: .9em; border-width: 0 0 1px }
+.items-browse { position: absolute; top: 0; z-index: 5; height: 100%; line-height: 2em; font-size: 7em; border-width: 1px 0 }
+.items-prev, .track-prev { left: 0px; border-right-width: 1px }
+.items-next, .track-next { right: 0px; border-left-width: 1px }
 
 #player { width: 100%; text-align: center; float: left }
 @media all and (min-width: 1000px) { #player { height: 637px } }
@@ -45,8 +43,8 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 
 .items, .items-view, .item { height: 15em }
 
-.items-view { overflow: hidden; position: relative; margin-bottom: 4em; border-bottom: 1px solid #666; border-top: 1px solid #666 }
-.items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7% }
+.items-view { overflow: hidden; position: relative; margin-bottom: 4em }
+.items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7%; border-bottom: 1px solid #666; border-top: 1px solid #666 }
 
 .item { height: 15em; margin: 0 !important; position: relative; z-index: 1; overflow: hidden; float: left ; border-left: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s;  }
 .item:hover { border-color: transparent; background: transparent; color: white; -webkit-transition-property: background-color, border-color, color; -webkit-transition-duration: .1s; -moz-transition-property: background-color, border-color, color; -moz-transition-duration: .1s; transition-property: background-color, border-color, color; transition-duration: .1s; }
