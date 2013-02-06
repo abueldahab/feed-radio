@@ -4,8 +4,13 @@ define([
     "views/browse"
 ], function(_, Backbone, BrowseView) {
     var ItemsBrowseView = BrowseView.extend({
+
+        initialize: function() {
+            var _this = this;
+            $(".items").on("webkitTransitionEnd transitionend", function() { _this.triggerScrollUpdate() });
+        },
+
         browse: function() {
-            
             var browsePrev = this.options.prev,
                 // # pixels +/- to margin-left on click
                 leftShift = $(".items-view").width() * ( browsePrev ? 1 : -1 ) * 0.8, 
@@ -23,10 +28,12 @@ define([
             }   
 
             var leftShiftWithSign = ( leftShift < 0 ? "-" : "+" ) + "=" + Math.abs(leftShift);
-            $(".items").animate({ marginLeft: leftShiftWithSign }, "fast", function() {
-                $(".items-view").trigger("scroll-update");
-            });
-        }   
+            $(".items").css({ marginLeft: leftShiftWithSign });
+        },
+
+        triggerScrollUpdate: function() {
+            $(".items-view").trigger("scroll-update");
+        }
     });
     
     return ItemsBrowseView;

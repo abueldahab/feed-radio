@@ -15,19 +15,9 @@ define([
         },  
 
         render: function() {
-            var _this = this;
-            this.setInactive(function() { 
-                _this.replaceItemHtml();
-            });
+            this.$el.css({ "opacity": 1 });
+            this.replaceItemHtml();
             return this;
-        },  
-
-        getStyles: function(state) {
-            var styles = { 
-                active: { opacity: 1 },
-                inactive: { opacity: 0 } 
-            };
-            return styles[state];
         },  
 
         replaceItemHtml: function() {
@@ -39,22 +29,9 @@ define([
                     nowPlayingModel.attributes);
 
             this.$el.html(template);
-            this.setActive(function() {
-                nowPlayingModel.get("view").createStream();
-            });
+            this.$el.css({ "opacity": 1});
+            nowPlayingModel.get("view").createStream();
         }, 
-
-        setState: function(state, callback) {
-            this.$el.animate(this.getStyles(state), "fast", callback);
-        },
-
-        setActive: function(callback) {
-            this.setState("active", callback);
-        },
-
-        setInactive: function(callback) {
-            this.setState("inactive", callback);
-        },
 
         animateItems: function() {
             var itemModel = this.model.get("items").getNowPlayingModel(),
@@ -67,12 +44,7 @@ define([
             $item.addClass("active_item");
 
             var playerViewObj = this;
-            $(".items").animate({ "margin-left": itemLeftOffset }, "fast",
-                function() {
-                    $(".items-view").trigger("scroll-update");
-                }
-            );
-            $("body").animate({ scrollTop: 0 }, "fast");
+            $(".items").css({ "margin-left": itemLeftOffset });
         },
 
         toggleNowPlaying: function() {
