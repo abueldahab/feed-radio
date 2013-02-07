@@ -14,24 +14,19 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .items-prev, .track-prev { left: 0px; border-right-width: 1px }
 .items-next, .track-next { right: 0px; border-left-width: 1px }
 
-#player { width: 100%; text-align: center; float: left }
-@media all and (min-width: 1000px) { #player { height: 637px } }
-@media all and (max-width: 1000px) { #player { height: 637px } }
+#player { width: 100%; text-align: center; float: left; height: 650px }
 @media all and (max-width: 800px) { #player { height: 537px } }
 @media all and (max-width: 600px) { #player { height: 427px } }
 @media all and (max-width: 400px) { #player { height: 312px } }
 
 #player p { font-size: 2.5em; padding: .5em; margin: 0 7.5% 0; height: 2.8em; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; text-shadow: 0 2px black; color: white; border-bottom: 1px solid #666; width: 85% }
 #player p a:hover { color: white }
-#player p a:hover, .browse:hover { -webkit-transition-property: color; -webkit-transition-duration: .1s; -moz-transition-property: color; -moz-transition-duration: .1s; transition-property: color; transition-duration: .1s }
+#player p a:hover, .browse:hover { -webkit-transition: color .1s; -moz-transition: color .1s; transition: color .1s }
 #player img { cursor: pointer; display: inline }
 #player img:before, #player iframe:before { content: " "; position: absolute; z-index: -1; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 5px solid #ffea00 }
 
 
-.youtube-wrap, .soundcloud-wrap { position: relative; width: 100% }
-
-@media all and (min-width: 1000px) { .youtube-wrap, .soundcloud-wrap { height: 550px } }
-@media all and (max-width: 1000px) { .youtube-wrap, .soundcloud-wrap { height: 550px } }
+.youtube-wrap, .soundcloud-wrap { position: relative; width: 100%; height: 550px }
 @media all and (max-width: 800px) { .youtube-wrap, .soundcloud-wrap { height: 450px } }
 @media all and (max-width: 600px) { .youtube-wrap, .soundcloud-wrap { height: 340px } }
 @media all and (max-width: 400px) { .youtube-wrap, .soundcloud-wrap { height: 225px } }
@@ -44,7 +39,7 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .items, .items-view, .item { height: 15em }
 
 .items-view { overflow: hidden; position: relative; margin-bottom: 4em }
-.items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7%; border-bottom: 1px solid #666; border-top: 1px solid #666; -webkit-transition: margin-left .5s ease-out; -moz-transision: margin-left .5s ease-out; transition: margin-left .5s ease-out }
+.items { position: absolute; overflow: hidden; margin-left: 0; width: 99999em; padding: 0 0 50px 7%; border-bottom: 1px solid #666; border-top: 1px solid #666; -webkit-transition: margin-left .25s ease-out; -moz-transision: margin-left .25s ease-out; transition: margin-left .25s ease-out }
 
 .item { height: 15em; margin: 0; position: relative; z-index: 1; overflow: hidden; float: left ; border-left: 1px solid #666; cursor: pointer }
 .item:hover { border-color: transparent; background: transparent; color: white }

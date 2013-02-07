@@ -15,7 +15,7 @@ define([
         },  
 
         render: function() {
-            this.$el.css({ "opacity": 1 });
+            this.$el.css({ opacity: 0 });
             this.replaceItemHtml();
             return this;
         },  
@@ -29,7 +29,7 @@ define([
                     nowPlayingModel.attributes);
 
             this.$el.html(template);
-            this.$el.css({ "opacity": 1});
+            this.$el.css({ opacity: 1 });
             nowPlayingModel.get("view").createStream();
         }, 
 

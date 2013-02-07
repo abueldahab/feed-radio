@@ -15,6 +15,17 @@ define([
         },  
 
         createStream: function() {
+            if ( typeof YT == 'undefined' || typeof YT.Player == 'undefined') {
+                var view = this;
+                window.onYouTubeIframeAPIReady = function() {
+                    view.createYoutubeStream();
+                };
+            } else {
+                this.createYoutubeStream();
+            }
+        },   
+
+        createYoutubeStream: function() {
             var view = this;
             window.ytPlayer = new YT.Player(this.id + "-player", {
                 height: 300,
@@ -42,7 +53,7 @@ define([
                     }
                 }
             });
-        }   
+        }
     });
 
     return YoutubeView;
