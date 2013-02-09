@@ -29,41 +29,42 @@ $first_item = (object) array_shift(array_values($items));
 
         <!-- FEATURED MEDIA -->
         <div class="hero-unit clearfix">
-            <!-- PREV TRACK -->
-            <div class="browse track-browse track-prev">&laquo;</div>
 
             <!-- MEDIA -->
-            <div id="player"></div>
+            <div id="player">
+                <div id="title-bar">
+                    <!-- PREV TRACK -->
+                    <div class="browse track-browse track-prev">&lsaquo;</div>
+
+                    <p id="title-wrap">
+                        <a href="" target="_blank">#</a>
+                        <span id="title"></span>
+                    </p>
+                    
+                    <!-- NEXT TRACK -->
+                    <div class="browse track-browse track-next">&rsaquo;</div>
+                </div>
+                <div id="media-wrap"></div>
+            </div>
 
             <!-- MEDIA PLAYER TEMPLATES BY MEDIA SOURCE -->
             <script type="text/template" id="player_youtube_template">
-                <p>
-                    <a href="<%= link %>" target="_blank">#</a>
-                    <%- title %>
-                </p>
                 <div class="youtube-wrap">
                     <div id="<%= id %>-player" />
                 </div>
             </script>
             <script type="text/template" id="player_soundcloud_template">
-                <p>
-                    <a href="<%= link %>" target="_blank">#</a>
-                    <%- title %>
-                </p>
                 <div class="soundcloud-wrap">
                     <div class="soundcloud-center">
                         <img src="<%= thumbnail %>" />
                     </div>
                 </div>
             </script>
-            
-            <!-- NEXT TRACK -->
-            <div class="browse track-browse track-next">&raquo;</div>
         </div>
 
         <!-- ITEMS ROW -->
         <div class="items-view">
-            <ul class="items row">
+            <ul class="items">
 
             <?php foreach ( $items as $id => $item ): ?>
                 <?php $item = (object) $item; ?>
@@ -78,9 +79,6 @@ $first_item = (object) array_shift(array_values($items));
             <?php endforeach ?>
 
             </ul>
-
-            <div class="browse items-browse items-prev">&lsaquo;</div>
-            <div class="browse items-browse items-next">&rsaquo;</div>
         </div>
     </div>
 

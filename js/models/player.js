@@ -16,7 +16,6 @@ define([
 
             this.on("change:nowPlaying", function() {
                 this.view.render();
-                this.view.animateItems(); 
             });
 
             window.SC.initialize({ client_id: this.get("soundcloudID") });

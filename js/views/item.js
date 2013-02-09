@@ -11,13 +11,14 @@ define([
         initialize: function(attrs) {
             this.player = attrs.player;
 
-            this.$el.find("img").lazyload({
-                container: $(".items-view"),
-                event: "scroll-update",
-                effect: "fadeIn",
-                threshold: $(window).width()
-            });
-        },  
+            // only load images if we're in a window wider than 600px
+            if ( $(document).width() > 600 ) {
+                this.$el.find("img").lazyload({
+                    effect: "fadeIn",
+                    threshold: 200
+                });
+            }
+        }, 
 
         toggle: function() {
             if ( this.player.get("nowPlaying") == this.id ) {

@@ -26,12 +26,11 @@ require([
     "views/player",
     "views/browse",
     "views/trackBrowse",
-    "views/itemsBrowse",
     "views/item",
     "views/soundcloud",
     "views/youtube",
     "collections/items"
-], function($, _, Backbone, Soundcloud, Youtube, Lazyload, PlayerModel, ItemModel, PlayerView, BrowseView, TrackBrowseView, ItemsBrowseView, ItemView, SoundcloudView, YoutubeView, ItemsCollection) {
+], function($, _, Backbone, Soundcloud, Youtube, Lazyload, PlayerModel, ItemModel, PlayerView, BrowseView, TrackBrowseView, ItemView, SoundcloudView, YoutubeView, ItemsCollection) {
 
     // player model, view
     var player = new PlayerModel();
@@ -76,9 +75,7 @@ require([
     // item collection, browse button views
     var itemsCollection = new ItemsCollection(allItems, { player: player }),
         trackPrev = new TrackBrowseView({ el: $(".track-prev"), prev: true, items: itemsCollection }),
-        trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection }),
-        itemsPrev = new ItemsBrowseView({ el: $(".items-prev"), prev: true, items: itemsCollection }),
-        itemsNext = new ItemsBrowseView({ el: $(".items-next"), prev: false, items: itemsCollection });
+        trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection });
 
     // queue first item
     player.set({ nowPlaying: allItems[0] });
