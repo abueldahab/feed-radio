@@ -45,7 +45,7 @@ require([
         var itemData = $(itemEl).data(),
             attrs = { 
                 el: itemEl,
-                id: itemData.mediaId, 
+                id: $(itemEl).attr("id"), 
                 title: itemData.title,
                 link: itemData.link,
                 thumbnail: itemData.thumbnail,

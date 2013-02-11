@@ -10,17 +10,11 @@ define([
 
         initialize: function(attrs) {
             this.player = attrs.player;
-
-            // only load images if we're in a window wider than 600px
-            if ( $(document).width() > 600 ) {
-                this.$el.find("img").lazyload({
-                    effect: "fadeIn",
-                    threshold: 200
-                });
-            }
         }, 
 
-        toggle: function() {
+        toggle: function(event) {
+            if ( event.target.className == "icon-external-link" ) return;
+            
             if ( this.player.get("nowPlaying") == this.id ) {
                 this.pause();
             } else {
@@ -30,16 +24,15 @@ define([
 
         togglePlayClass: function(isPlaying) {
             if ( isPlaying ) {
-                $(".playing").removeClass("playing");
+                $(".icon-pause").removeClass("icon-pause").addClass("icon-play");
             } else {
-                this.$el.addClass("playing");
+                this.$el.find(".media-button").removeClass("icon-play").addClass("icon-pause");
             }
         },
 
         activate: function() {
-            $(".active_item").removeClass("active_item");
-            $(".playing").removeClass("playing");
-            this.$el.addClass("playing");
+            $(".icon-pause").removeClass("icon-pause").addClass("icon-play");
+            this.$el.find(".media-button").removeClass("icon-play").addClass("icon-pause");
 
             if ( window.SM ) window.SM.stop();
             this.player.setNowPlaying(this.id);

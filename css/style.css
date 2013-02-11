@@ -1,34 +1,31 @@
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box }
 
 body { font-family: 'Goudy Bookletter 1911', serif; padding: 0 }
-body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") }
+body, .hero-unit, .items-browse { background: #fff; color: #555 }
 
 .container-fluid { overflow: visible; padding: 0 }
 .hero-unit { padding: 0; margin: 0; border-radius: 0; position: relative }
 
 #player { width: 100%; text-align: center; float: left }
-#title-bar { border-bottom: 1px solid #666; height: 6em; position: relative }
-#player p { font-size: 2.5em; padding: .5em; margin: 0 7.5% 0; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; text-shadow: 0 2px black; color: white; width: 85% }
-#player p a:hover { color: white }
-#player p a:hover, .browse:hover { -webkit-transition: color .1s; -moz-transition: color .1s; transition: color .1s }
+#title-bar { border-bottom: 1px solid #ddd; height: 6em; position: relative }
+#player p { font-size: 2.5em; padding: .5em; margin: 0 7.5% 0; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; width: 85% }
 #player img { cursor: pointer; display: inline }
-#player img:before, #player iframe:before { content: " "; position: absolute; z-index: -1; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 5px solid #ffea00 }
 
-.browse { cursor: pointer; color: white; width: 7.5%; text-align: center; text-shadow: 0 1px black; border-color: #666; border-style: solid; font-size: 7em; position: absolute; top: 0; line-height: .65em; height: 100%; border-width: 0 }
-.browse:hover { color: #06a; border-color: #999 }
-
+.browse { cursor: pointer; width: 7.5%; text-align: center; border-color: #ddd; border-style: solid; position: absolute; top: 0; height: 100%; border-width: 0 }
+.browse:hover { color: #06a; border-color: #bbb }
+.browse i { font-size: 4em; line-height: 1.5em }
 .track-prev { left: 0px; border-right-width: 1px }
 .track-next { right: 0px; border-left-width: 1px }
 
 @media all and ( max-width: 600px ) {
     #title-bar { height: 5em }
     #player p { font-size: 2em }
-    .browse { font-size: 5em; line-height: .75em }
+    .browse i { font-size: 3em }
 }
 @media all and ( max-width: 400px ) {
     #title-bar { height: 4em }
     #player p { font-size: 1.6em }
-    .browse { font-size: 4em; line-height: .75em }
+    .browse i { font-size: 2em; line-height: 2em }
 }
 
 
@@ -41,25 +38,9 @@ body, .hero-unit, .items-browse { background: url("../img/twinkle_twinkle.png") 
 .soundcloud-wrap { text-align: center; display: table }
 .soundcloud-center { display: table-cell; vertical-align: middle }
 
-
-.items { margin: 0; border-bottom: 1px solid #666; border-top: 1px solid #666; height: auto }
-
-.item { height: 15em; margin: 0; position: relative; z-index: 1; overflow: hidden; float: left; border-bottom: 1px solid #666; border-left: 1px solid #666; cursor: pointer }
-@media all and (min-width: 1400px) { .item { width: 14.28% } }
-@media all and (max-width: 1400px) { .item { width: 16.666% } }
-@media all and (max-width: 1200px) { .item { width: 20% } }
-@media all and (max-width: 1000px) { .item { width: 25% } }
-@media all and (max-width: 800px) { .item { width: 33% } }
-@media all and (max-width: 600px) { .item { width: 100%; height: auto; border-left: 0 } .item p { margin: 0 } }
-
-.item:hover { border-color: transparent; background: transparent; color: white }
-.item img { position: absolute; top: -30%; left: -30%; max-width: none; height: auto !important; cursor: pointer; display: inline }
-.item p { position: relative; z-index: 1; background: rgba(33, 33, 33, 0.75); font-size: 1.5em; line-height: 1.1em; padding: 10px; cursor: pointer; text-shadow: 0 1px black; color: white; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); font-weight: bold; border-bottom: 1px solid rgba(33, 33, 33, 0.5) }
-.item:hover p { background: rgba(0,0,0,0.85); text-shadow: 0 1px black; color: white }
-.item a, #player a { color: #06A }
+.items { max-width: 600px; margin: 10px auto }
+.item { position: relative; overflow: hidden; border-bottom: 1px solid #ddd; cursor: pointer; width: 100%; padding: 10px 10px 10px 40px; font-size: 1.5em; line-height: 1.1em; margin: 0 }
+.item .media-button { font-size: .5em; position: absolute; top: 16px; left: 20px }
+.item .icon-external-link { font-size: .6em; color: #bbb }
+.item:hover .icon-external-link { color: #555 }
 .item a:hover, #player a:hover { text-decoration: none }
-
-.active_item { }
-.playing:after, .playing:hover:after { content: "PAUSE" !important }
-.item:hover:after, .active_item:after { content: "PLAY" }
-.item:hover:after, .active_item:after { background-color: rgba(255, 255, 255, 0.8); color: rgba(0, 0, 0, 1); text-shadow: 0 1px white; line-height: 5.5em; font-size: 2.5em; text-align: center; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; border: 5px solid black; font-weight: bold }

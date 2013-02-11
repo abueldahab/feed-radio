@@ -5,7 +5,8 @@ define([
 ], function($, _, Backbone) {
     var PlayerView = Backbone.View.extend({
         events: {
-            "click img, click iframe": "toggleNowPlaying"
+            "click img, click iframe": "toggleNowPlaying",
+            "click a": "scrollToItem"
         },  
 
         initialize: function() {
@@ -25,10 +26,9 @@ define([
                     nowPlayingModel.attributes);
 
             $("#title").html(nowPlayingModel.attributes.title);
-            $("#title-wrap a").attr("href", nowPlayingModel.attributes.link);
+            $("#title-wrap a").html("#").attr("href", "#" + nowPlayingModel.attributes.id);
             $("#media-wrap").html(template).css({ opacity: 1 });
             nowPlayingModel.get("view").createStream();
-            nowPlayingModel.get("view").$el.addClass("active_item");
 
             return this;
         },  
@@ -43,6 +43,12 @@ define([
 
         togglePrev: function() {
             itemsCollection.getPrevModel().get("view").activate();
+        },
+
+        scrollToItem: function(event) {
+            var itemCoords = $(event.target.id).offset();
+            window.scrollTo(itemCoords.top, itemCoords.left);
+            return false;
         }
     });
 

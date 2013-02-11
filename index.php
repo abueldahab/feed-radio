@@ -1,7 +1,6 @@
 <?php 
 include "php/ConfigData.php";
 $config_data = new ConfigData();
-$google_analytics_account_key = $config_data->account_keys->google_analytics;
 
 include "php/MediaData.php";
 $media_data = new MediaData($config_data);
@@ -19,6 +18,7 @@ $first_item = (object) array_shift(array_values($items));
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
     <script data-main="js/main<?php echo !isset($_GET["js_debug"]) ? "-built" : "" ?>" src="js/libs/require/require.js"></script>
@@ -34,15 +34,15 @@ $first_item = (object) array_shift(array_values($items));
             <div id="player">
                 <div id="title-bar">
                     <!-- PREV TRACK -->
-                    <div class="browse track-browse track-prev">&lsaquo;</div>
+                    <div class="browse track-browse track-prev"><i class="icon-angle-left"></i></div>
 
                     <p id="title-wrap">
-                        <a href="" target="_blank">#</a>
+                        <a href=""></a>
                         <span id="title"></span>
                     </p>
                     
                     <!-- NEXT TRACK -->
-                    <div class="browse track-browse track-next">&rsaquo;</div>
+                    <div class="browse track-browse track-next"><i class="icon-angle-right"></i></div>
                 </div>
                 <div id="media-wrap"></div>
             </div>
@@ -68,12 +68,10 @@ $first_item = (object) array_shift(array_values($items));
 
             <?php foreach ( $items as $id => $item ): ?>
                 <?php $item = (object) $item; ?>
-                <li class="item span3" data-media-id="<?php echo $id ?>" data-link="<?php echo $item->link ?>" data-title="<?php echo $item->title ?>" data-thumbnail="<?php echo $item->thumbnail ?>" data-media-src="<?php echo $item->media_src ?>" <?php echo $item->soundcloud_stream ? 'data-soundcloud-stream="' . $item->soundcloud_stream . '"' : '' ?>>
-                    <p>
-                        <a href="<?php echo $item->link ?>" target="_blank">#</a>
-                        <?php echo html_entity_decode($item->title) ?>
-                    </p>
-                    <img src="img/twinkle_twinkle.png" data-original="<?php echo $item->thumbnail ?>" />
+                <li class="item span3" id="<?php echo $id ?>" data-link="<?php echo $item->link ?>" data-title="<?php echo $item->title ?>" data-thumbnail="<?php echo $item->thumbnail ?>" data-media-src="<?php echo $item->media_src ?>" <?php echo $item->soundcloud_stream ? 'data-soundcloud-stream="' . $item->soundcloud_stream . '"' : '' ?>>
+                    <i class="media-button icon-play"></i> 
+                    <?php echo html_entity_decode($item->title) ?>
+                    <a href="<?php echo $item->link ?>" target="_blank"><i class="icon-external-link"></i></a>
                 </li>
 
             <?php endforeach ?>
@@ -82,6 +80,7 @@ $first_item = (object) array_shift(array_values($items));
         </div>
     </div>
 
+<?php $google_analytics_account_key = $config_data->account_keys->google_analytics; ?>
 <?php if ( $google_analytics_account_key ): ?>
     <script type="text/javascript">
         var _gaq = _gaq || [];
