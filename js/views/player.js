@@ -21,8 +21,6 @@ define([
             var nowPlayingIndex = this.model.get("nowPlaying") || this.model.setNowPlaying(this.model.get("items").at(0).id, false),
                 nowPlayingModel = this.model.get("items").get(nowPlayingIndex);
 
-            console.log($("#" + nowPlayingModel.attributes.mediaSrc + "-player-template").html(), nowPlayingModel.attributes);
-            
             var playerTemplate = _.template($("#" + nowPlayingModel.attributes.mediaSrc + "-player-template").html(), 
                     nowPlayingModel.attributes),
                 titleTemplate = _.template($("#title-wrap-template").html(), nowPlayingModel.attributes);
