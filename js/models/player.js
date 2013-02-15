@@ -10,29 +10,24 @@ define([
         },  
 
         initialize: function() {
+            // map view attr to easier-to-get prop
             this.on("change:view", function() {
                 this.view = this.get("view");
             });
 
+            // trigger new player when nowPlaying attribute is changed
             this.on("change:nowPlaying", function() {
                 this.view.render();
             });
 
+            // init global Soundcloud 
             window.SC.initialize({ client_id: this.get("soundcloudID") });
-            
-            $(document).on("keyup", function(event) {
-                if ( event.which == 39 ) { 
-                    $(".track-next").trigger("click");
-                } else if ( event.which == 37 ) { 
-                    $(".track-prev").trigger("click");
-                }   
-            });
         },  
 
-        setNowPlaying: function(itemId, autoplay) {
+        setNowPlaying: function(itemId) {
             this.set({
                 nowPlaying: itemId,
-                autoplay: autoplay === false ? false : true
+                autoplay: this.get("nowPlaying")
             }); 
         }   
     });

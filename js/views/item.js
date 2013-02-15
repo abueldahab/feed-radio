@@ -1,11 +1,10 @@
 define([
     "jquery", 
-    "underscore", 
     "backbone"
-], function($, _, Backbone) {
+], function($, Backbone) {
     var ItemView = Backbone.View.extend({
         events: {
-            click: "toggle"
+            "click .list-data": "toggle"
         },  
 
         initialize: function(attrs) {
@@ -13,7 +12,8 @@ define([
         }, 
 
         toggle: function(event) {
-            if ( event.target.className == "icon-external-link" ) return;
+            // ignore click if link element is target
+            if ( event && event.target.className == "icon-external-link" ) return;
             
             if ( this.player.get("nowPlaying") == this.id ) {
                 this.pause();
@@ -24,18 +24,21 @@ define([
 
         togglePlayClass: function(isPlaying) {
             if ( isPlaying ) {
-                $(".icon-pause").removeClass("icon-pause").addClass("icon-play");
+                $(".active").removeClass("active");
             } else {
-                this.$el.find(".media-button").removeClass("icon-play").addClass("icon-pause");
+                this.$el.addClass("active");
             }
         },
 
         activate: function() {
-            $(".icon-pause").removeClass("icon-pause").addClass("icon-play");
-            this.$el.find(".media-button").removeClass("icon-play").addClass("icon-pause");
+            $(".active").removeClass("active");
+            this.$el.addClass("active");
 
             if ( window.SM ) window.SM.stop();
+
+            this.$el.append($("#player"));
             this.player.setNowPlaying(this.id);
+            window.scrollTo(0, this.$el.offset().top - $("#title-bar").height());
         }   
     });
 

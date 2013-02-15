@@ -27,40 +27,38 @@ $first_item = (object) array_shift(array_values($items));
 <body> 
     <div id="container" class="container-fluid clearfix">
 
-        <!-- FEATURED MEDIA -->
-        <div class="hero-unit clearfix">
+        <div id="title-bar">
+            <div class="browse track-browse track-prev"><i class="icon-angle-left"></i></div>
 
-            <!-- MEDIA -->
-            <div id="player">
-                <div id="title-bar">
-                    <!-- PREV TRACK -->
-                    <div class="browse track-browse track-prev"><i class="icon-angle-left"></i></div>
+            <!-- TITLE BAR TEMPLATE -->
+            <script type="text/template" id="title-wrap-template">
+                <a id="title-link" href="<%= link %>"><i class="icon-external-link"></i></a>
+                <span id="title"><%= title %></span>
+            </script>
+            <p id="title-wrap"></p>
 
-                    <p id="title-wrap">
-                        <a href=""></a>
-                        <span id="title"></span>
-                    </p>
-                    
-                    <!-- NEXT TRACK -->
-                    <div class="browse track-browse track-next"><i class="icon-angle-right"></i></div>
-                </div>
-                <div id="media-wrap"></div>
-            </div>
+            <div class="browse track-browse track-next"><i class="icon-angle-right"></i></div>
+        </div>
 
-            <!-- MEDIA PLAYER TEMPLATES BY MEDIA SOURCE -->
-            <script type="text/template" id="player_youtube_template">
+        <!-- MEDIA -->
+        <div id="player">
+            <!-- MEDIA PLAYER TEMPLATES BY SOURCE -->
+            <script type="text/template" id="youtube-player-template">
                 <div class="youtube-wrap">
                     <div id="<%= id %>-player" />
                 </div>
             </script>
-            <script type="text/template" id="player_soundcloud_template">
+            <script type="text/template" id="soundcloud-player-template">
                 <div class="soundcloud-wrap">
                     <div class="soundcloud-center">
                         <img src="<%= thumbnail %>" />
                     </div>
                 </div>
             </script>
+
+            <div id="media-wrap"></div>
         </div>
+
 
         <!-- ITEMS ROW -->
         <div class="items-view">
@@ -68,12 +66,13 @@ $first_item = (object) array_shift(array_values($items));
 
             <?php foreach ( $items as $id => $item ): ?>
                 <?php $item = (object) $item; ?>
-                <li class="item span3" id="<?php echo $id ?>" data-link="<?php echo $item->link ?>" data-title="<?php echo $item->title ?>" data-thumbnail="<?php echo $item->thumbnail ?>" data-media-src="<?php echo $item->media_src ?>" <?php echo $item->soundcloud_stream ? 'data-soundcloud-stream="' . $item->soundcloud_stream . '"' : '' ?>>
-                    <i class="media-button icon-play"></i> 
-                    <?php echo html_entity_decode($item->title) ?>
-                    <a href="<?php echo $item->link ?>" target="_blank"><i class="icon-external-link"></i></a>
+                <li class="item" id="<?php echo $id ?>" data-link="<?php echo $item->link ?>" data-title="<?php echo $item->title ?>" data-thumbnail="<?php echo $item->thumbnail ?>" data-media-src="<?php echo $item->media_src ?>" <?php echo $item->soundcloud_stream ? 'data-soundcloud-stream="' . $item->soundcloud_stream . '"' : '' ?>>
+                    <div class="list-data">
+                        <i class="media-button icon-play"></i> 
+                        <?php echo html_entity_decode($item->title) ?>
+                        <a href="<?php echo $item->link ?>" target="_blank"><i class="icon-external-link"></i></a>
+                    </div>
                 </li>
-
             <?php endforeach ?>
 
             </ul>

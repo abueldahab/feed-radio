@@ -4,13 +4,11 @@ require.config({
         underscore: "libs/underscore/underscore-min",
         backbone: "libs/backbone/backbone-min",
         soundcloud: "http://connect.soundcloud.com/sdk",
-        youtube: "http://www.youtube.com/iframe_api?",
-        lazyload: "libs/jquery/jquery.lazyload.min"
+        youtube: "http://www.youtube.com/iframe_api?"
     },  
     shim: {
         underscore: { exports: "_" },  
-        backbone: { deps: ["jquery", "underscore"], exports: "Backbone" },  
-        lazyload: { deps: ["jquery"], exports: "Lazyload" }   
+        backbone: { deps: ["jquery", "underscore"], exports: "Backbone" }
     }
 });
 
@@ -20,17 +18,16 @@ require([
     "backbone", 
     "soundcloud", 
     "youtube", 
-    "lazyload",
     "models/player",
     "models/item",
     "views/player",
+    "views/titleBar",
     "views/browse",
-    "views/trackBrowse",
     "views/item",
     "views/soundcloud",
     "views/youtube",
     "collections/items"
-], function($, _, Backbone, Soundcloud, Youtube, Lazyload, PlayerModel, ItemModel, PlayerView, BrowseView, TrackBrowseView, ItemView, SoundcloudView, YoutubeView, ItemsCollection) {
+], function($, _, Backbone, Soundcloud, Youtube, PlayerModel, ItemModel, PlayerView, TitleBarView, BrowseView, ItemView, SoundcloudView, YoutubeView, ItemsCollection) {
 
     // player model, view
     var player = new PlayerModel();
@@ -53,12 +50,10 @@ require([
                 player: player
             };
         if ( itemData.soundcloudStream ) attrs.soundcloud_stream = itemData.soundcloudStream;
-        var itemModel = new ItemModel(attrs),
-            itemView;
+        attrs.model = new ItemModel(attrs);
 
-        attrs.model = itemModel;
-
-        // use appropriate view based on media_src
+        // use appropriate view based on media src
+        var itemView;
         switch ( itemData.mediaSrc ) {
             case "youtube":
                 itemView = new YoutubeView(attrs);
@@ -68,15 +63,16 @@ require([
                 break;
         }
 
-        itemModel.set({ view: itemView });
-        allItems.push(itemModel);
+        attrs.model.set({ view: itemView });
+        allItems.push(attrs.model);
     });
 
     // item collection, browse button views
     var itemsCollection = new ItemsCollection(allItems, { player: player }),
-        trackPrev = new TrackBrowseView({ el: $(".track-prev"), prev: true, items: itemsCollection }),
-        trackNext = new TrackBrowseView({ el: $(".track-next"), prev: false, items: itemsCollection });
+        trackPrev = new BrowseView({ el: $(".track-prev"), prev: true, items: itemsCollection }),
+        trackNext = new BrowseView({ el: $(".track-next"), prev: false, items: itemsCollection }),
+        titleBar = new TitleBarView({ el: $("#title-bar"), items: itemsCollection });
 
     // queue first item
-    player.set({ nowPlaying: allItems[0] });
+    itemsCollection.at(0).attributes.view.toggle();
 });
