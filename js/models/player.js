@@ -3,7 +3,6 @@ define([
     "underscore",
     "backbone"
 ], function($, _, Backbone) {
-
     var PlayerModel = Backbone.Model.extend({
         defaults: {
             soundcloudID: "pmMtnx3RtGTjpsLJQDptsQ"
@@ -22,14 +21,7 @@ define([
 
             // init global Soundcloud 
             window.SC.initialize({ client_id: this.get("soundcloudID") });
-        },  
-
-        setNowPlaying: function(itemId) {
-            this.set({
-                nowPlaying: itemId,
-                autoplay: this.get("nowPlaying")
-            }); 
-        }   
+        }
     });
 
     return PlayerModel;

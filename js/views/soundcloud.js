@@ -5,18 +5,18 @@ define([
 ], function(_, Backbone, ItemView) {
     var SoundcloudView = ItemView.extend({
         pause: function() {
-            var isPlaying = !window.SM.paused;
             window.SM.togglePause();
-            this.togglePlayClass(isPlaying);
         },  
 
         createStream: function() {
-            var item = this;
+            var view = this,
+                player = this.model.collection.player;
+
             SC.stream(this.model.get("soundcloud_stream"), 
                 {   
-                    autoPlay: this.player.get("autoplay"),
+                    autoPlay: player.get("autoplay"),
                     onfinish: function() {
-                        item.player.view.toggleNext();
+                        player.view.toggle("next");
                     }   
                 },  
                 function(sound) { 

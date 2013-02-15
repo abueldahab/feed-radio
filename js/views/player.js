@@ -4,12 +4,6 @@ define([
     "backbone"
 ], function($, _, Backbone) {
     var PlayerView = Backbone.View.extend({
-        events: {
-            /* map image clicks to pause/play
-             * media in iframe, e.g. youtube, doesn't register click so is handled in YoutubeView */
-            "click img": "toggleNowPlaying"
-        },  
-
         initialize: function() {
             this.model.set({ 
                 view: this
@@ -18,31 +12,40 @@ define([
 
         render: function() {
             // render player with new item attrs
-            var nowPlayingIndex = this.model.get("nowPlaying") || this.model.setNowPlaying(this.model.get("items").at(0).id, false),
-                nowPlayingModel = this.model.get("items").get(nowPlayingIndex);
+            var model = this.model,
+                items = model.get("items");
 
-            var playerTemplate = _.template($("#" + nowPlayingModel.attributes.mediaSrc + "-player-template").html(), 
+            if ( !model.get("nowPlaying") ) {
+                model.set({
+                    "nowPlaying": items.at(0).id, 
+                    "autoplay": false
+                });
+            }
+
+            var nowPlayingIndex = model.get("nowPlaying"),
+                nowPlayingModel = items.get(nowPlayingIndex),
+                playerTemplate = _.template($("#" + nowPlayingModel.attributes.mediaSrc + "-player-template").html(), 
                     nowPlayingModel.attributes),
                 titleTemplate = _.template($("#title-wrap-template").html(), nowPlayingModel.attributes);
             
             $("#media-wrap").html(playerTemplate);
             $("#title-wrap").html(titleTemplate);
 
+            // init stream
             nowPlayingModel.get("view").createStream();
 
             return this;
         },  
 
-        toggleNowPlaying: function() {
-            this.model.get("items").getNowPlayingModel().get("view").toggle();
-        },
-
-        toggleNext: function() {
-            this.model.get("items").getNextModel().get("view").activate();
-        },
-
-        togglePrev: function() {
-            itemsCollection.getPrevModel().get("view").activate();
+        toggle: function(target) {
+            var items = this.model.get("items");
+            if ( target == "prev" ) {
+                items.getPrevModel().get("view").activate();
+            } else if ( target == "next" ) {
+                items.getNextModel().get("view").activate();
+            } else {
+                items.getNowPlayingModel().get("view").toggle();
+            }
         }
     });
 

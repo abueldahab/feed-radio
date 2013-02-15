@@ -46,8 +46,7 @@ require([
                 title: itemData.title,
                 link: itemData.link,
                 thumbnail: itemData.thumbnail,
-                mediaSrc: itemData.mediaSrc,
-                player: player
+                mediaSrc: itemData.mediaSrc
             };
         if ( itemData.soundcloudStream ) attrs.soundcloud_stream = itemData.soundcloudStream;
         attrs.model = new ItemModel(attrs);

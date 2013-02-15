@@ -8,8 +8,8 @@ a:hover { text-decoration: none }
 .hero-unit { padding: 0; margin: 0; border-radius: 0; position: relative }
 
 #title-bar { width: 100%; background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; height: 6em; position: relative; z-index: 10; position: fixed }
+#title-wrap { text-align: center; padding: .5em; margin: 0 7.5% 0; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; width: 85%; font-size: 2.4em }
 #title-wrap i { font-size: .6em; padding-right: 5px }
-#title-wrap { text-align: center; font-size: 2.5em; padding: .5em; margin: 0 7.5% 0; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5em; overflow: hidden; width: 85% }
 #title { cursor: pointer }
 
 #player { width: 100%; text-align: center; float: left; margin-top: -1px }
@@ -21,7 +21,7 @@ a:hover { text-decoration: none }
 .track-prev { left: 0px; border-right-width: 1px }
 .track-next { right: 0px; border-left-width: 1px }
 
-#media-wrap { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd }
+#media-wrap { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; overflow: hidden }
 #media-wrap, .youtube-wrap, .soundcloud-wrap { position: relative; width: 100%; height: 550px }
 .youtube-wrap iframe { width: 100%; height: 100% }
 .soundcloud-wrap { text-align: center; display: table }
@@ -38,19 +38,23 @@ a:hover { text-decoration: none }
 
 
 @media all and (max-width: 800px) { 
+    #title-bar { height: 5.5em }
+    #title-wrap { font-size: 2.2em }
+    .items { margin-top: 5.5em }
     #media-wrap, .youtube-wrap, .soundcloud-wrap { height: 450px } 
+    .browse i { font-size: 3.5em }
 }
 @media all and ( max-width: 600px ) {
     #title-bar { height: 5em }
+    #title-wrap { font-size: 2em }
     .items { margin-top: 5em }
     #media-wrap, .youtube-wrap, .soundcloud-wrap { height: 340px }
-    #player p { font-size: 2em }
     .browse i { font-size: 3em }
 }
 @media all and ( max-width: 400px ) {
     #title-bar { height: 4em }  
+    #title-wrap { font-size: 1.6em }
     .items { margin-top: 4em }
     #media-wrap, .youtube-wrap, .soundcloud-wrap { height: 225px }
-    #player p { font-size: 1.6em }
     .browse i { font-size: 2em; line-height: 2em }
 }

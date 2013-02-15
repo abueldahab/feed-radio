@@ -9,7 +9,7 @@ define([
 
         scrollToMedia: function() {
             var nowPlaying = this.options.items.getNowPlayingModel();
-            window.scrollTo(0, nowPlaying.attributes.view.$el.offset().top);
+            window.scrollTo(0, nowPlaying.attributes.view.$el.offset().top - this.$el.height());
         }
     });
 
