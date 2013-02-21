@@ -32,7 +32,7 @@ $first_item = (object) array_shift(array_values($items));
 
             <!-- TITLE BAR TEMPLATE -->
             <script type="text/template" id="title-wrap-template">
-                <a id="title-link" href="<%= link %>"><i class="icon-external-link"></i></a>
+                <a id="title-link" href="<%= link %>" target="_blank"><i class="icon-external-link"></i></a>
                 <span id="title"><%= title %></span>
             </script>
             <p id="title-wrap"></p>
