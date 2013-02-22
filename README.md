@@ -18,7 +18,6 @@ _**Note**: This largely incomplete project was built for my own consumption.  Wh
 * <a href="http://documentcloud.github.com/backbone/" target="_blank">Backbone.js</a>
 * <a href="http://jquery.com/" target="_blank">jQuery</a>
 * <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>
-* <a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a>
 * <a href="https://developers.google.com/feed/" target="_blank">Google Feeds API</a>
 * <a href="https://developers.google.com/youtube/" target="_blank">YouTube API</a>
 * <a href="http://developers.soundcloud.com/" target="_blank">SoundCloud API</a>
