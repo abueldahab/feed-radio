@@ -7,14 +7,6 @@ define([
         },
 
         initialize: function() {
-            // arrow keys browse tracks
-            $(document).on("keyup", function(event) {
-                if ( event.which == 39 || event.which == 40 ) { 
-                    $(".track-next").trigger("click");
-                } else if ( event.which == 37 || event.which == 38 ) { 
-                    $(".track-prev").trigger("click");
-                }   
-            });
         },
 
         browse: function(event) {
